@@ -1,0 +1,71 @@
+get_down:
+
+down none
+down set_buzzer "on"
+down set_buzzer "off"
+down set_child_lock "on"
+down set_child_lock "off"
+down set_power "on"
+down set_power "off"
+down set_mode "auto" | high | medium | silent | (strong - invalid)
+down set_dry "on"
+down set_dry "off"
+down set_led_b "2" (off)
+down set_led_b "1" (on, dim)
+down set_led_b "0" (on, bright)
+down set_limit_hum 80 (min: 30, max: 80)
+down MIIO_net_change uap
+down MIIO_net_change unprov
+down MIIO_net_change local
+
+
+props:
+
+props power "off" mode "silent" depth 25 buzzer "off" dry "on" child_lock "off" temp_dec 217 humidity 53 -> ok
+props mode "auto" -> ok
+props mode "silent" -> ok
+props mode "medium" -> ok
+props mode "high" -> ok
+props power "on" button_pressed "power" depth 24 -> ok
+props power "off" button_pressed "power" -> ok
+props humidify DD -> ok
+props buzzer "off" -> ok
+props child_lock "on" -> ok
+props child_lock "off" -> ok
+props button_pressed "led" -> ok
+props use_time 834220 -> ok
+props temp_dec DDD -> ok
+props button_pressed "led" -> ok
+
+
+
+events:
+
+event speed_change "sR_1" "sR_2" "temp_221" "humidity_53" "depth_23" -> ok
+event speed_change "sR_2" "sR_3" "temp_225" "humidity_52" "depth_21" -> ok
+event speed_change "sR_3" "sR_4" "temp_228" "humidity_51" "depth_21" -> ok
+event speed_change "sR_4" "sR_1" "temp_228" "humidity_51" "depth_21" -> ok
+
+
+
+model zhimi.humidifier.ca1 -> ok
+ble_config set 895 1029 -> ok
+mcu_version 1029 -> ok
+net -> uap
+net -> unprov (after 1 hour of being uap wifi turns off)
+net -> local
+time -> yyyy-mm-dd hh:mm:ss (local time)
+restore -> ok
+reboot -> ok
+
+result "ok" -> ok
+
+
+
+
+errors:
+
+error "device_poweroff" -6011 -> ok
+
+down set_mode "strong"
+error "invalid arg" -5001 (end up in Error: {'code': -5001, 'message': 'invalid arg'} from api)
