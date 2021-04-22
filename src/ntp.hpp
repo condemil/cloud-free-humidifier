@@ -2,9 +2,12 @@
 
 #include <time.h>
 
+#include "logger.hpp"
+
 namespace ntp {
-static time_t now;
 static char timeBuff[20];
+time_t now;
+struct tm *timeinfo;
 
 void setup() {
     configTime(PSTR("UTC0"), "pool.ntp.org"); // TODO: configurable timezone
@@ -12,13 +15,10 @@ void setup() {
 
 char *get_time() {
     now = time(nullptr);
-    struct tm *timeinfo = localtime(&now);
+    timeinfo = localtime(&now);
 
     strftime(timeBuff, sizeof(timeBuff), "%Y-%m-%d %H:%M:%S", timeinfo);
-    return timeBuff;
-}
 
-uint32_t get_unixtime() {
-    return time(nullptr);
+    return timeBuff;
 }
 } // namespace ntp

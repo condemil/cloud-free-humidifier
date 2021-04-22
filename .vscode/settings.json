@@ -1,43 +1,6 @@
 {
-  "files.associations": {
-    "functional": "cpp",
-    "type_traits": "cpp",
-    "array": "cpp",
-    "initializer_list": "cpp",
-    "deque": "cpp",
-    "unordered_map": "cpp",
-    "vector": "cpp",
-    "tuple": "cpp",
-    "utility": "cpp",
-    "*.tcc": "cpp",
-    "cctype": "cpp",
-    "clocale": "cpp",
-    "cmath": "cpp",
-    "cstdarg": "cpp",
-    "cstdint": "cpp",
-    "cstdio": "cpp",
-    "cstdlib": "cpp",
-    "cwchar": "cpp",
-    "cwctype": "cpp",
-    "exception": "cpp",
-    "fstream": "cpp",
-    "iosfwd": "cpp",
-    "istream": "cpp",
-    "limits": "cpp",
-    "new": "cpp",
-    "ostream": "cpp",
-    "numeric": "cpp",
-    "sstream": "cpp",
-    "stdexcept": "cpp",
-    "streambuf": "cpp",
-    "cinttypes": "cpp",
-    "typeinfo": "cpp",
-    "atomic": "cpp",
-    "list": "cpp"
-  },
   "search.exclude": {
     ".pio": true
   },
-  "python.formatting.blackArgs": ["--skip-numeric-underscore-normalization"],
   "python.formatting.provider": "black"
 }

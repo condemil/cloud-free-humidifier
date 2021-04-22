@@ -1,20 +1,18 @@
 #pragma once
 
-#include "command.hpp"
-
 enum class Command : uint8_t {
     buzzer,
     child_lock,
     power,
-    operation_mode,
+    preset_mode,
     dry,
     led_brightness,
     limit_humiditiy,
     net_change,
 };
 
-enum class OperationMode : uint8_t {
-    auto_mode,
+enum class PresetMode : uint8_t {
+    auto_,
     high,
     medium,
     silent,
@@ -24,11 +22,6 @@ enum class NetMode : uint8_t {
     uap, // unprovisioned, access point created
     unprov, // unprovisioned, access point disabled (after 1 hour of being uap)
     local, // wifi is properly set up and connected
-};
-
-enum class UpdateSource : uint8_t {
-    mqtt,
-    device,
 };
 
 enum class SwitchMode : uint8_t {
@@ -43,21 +36,13 @@ enum class LedMode : uint8_t {
 };
 
 namespace state {
-static const char *TOKEN = "CHANGE_ME"; // + ota pass
-
 static bool power;
+static PresetMode preset_mode;
 
-void setPower(bool p, UpdateSource source) {
-    if (p == power)
-        return;
+static float temperature;
+static uint8_t humidity;
+static uint8_t depth;
 
-    power = p;
-
-    if (source == UpdateSource::mqtt) {
-        command_queue::CommandItem ci;
-        ci.command = (uint8_t)Command::power;
-        ci.value = (uint8_t)power;
-        command_queue::push(ci);
-    }
-}
+static bool power_updated;
+static bool preset_mode_updated;
 } // namespace state

@@ -4,9 +4,25 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "PlatformIO",
-      "task": "Upload File System image",
-      "problemMatcher": ["$platformio"]
+      "label": "build & upload",
+      "type": "shell",
+      "command": "platformio run -t upload",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "upload",
+      "type": "shell",
+      "command": "esptool.py -p /dev/ttyUSB0 -c esp8266 write_flash 0 .pio/build/esp12e/firmware.bin",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "monitor",
+      "type": "shell",
+      "command": "miniterm.py /dev/ttyUSB0 115200 --raw",
+      "problemMatcher": [],
+      "group": "build"
     }
   ]
 }

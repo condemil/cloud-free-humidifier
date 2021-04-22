@@ -1,3 +1,6 @@
+W_RX - receive from STM32
+W_TX - transfer to SMT32
+
 get_down:
 
 down none
@@ -7,7 +10,7 @@ down set_child_lock "on"
 down set_child_lock "off"
 down set_power "on"
 down set_power "off"
-down set_mode "auto" | high | medium | silent | (strong - invalid)
+down set_mode "auto" | "high" | "medium" | "silent" | ("strong" - invalid)
 down set_dry "on"
 down set_dry "off"
 down set_led_b "2" (off)
@@ -28,7 +31,7 @@ props mode "medium" -> ok
 props mode "high" -> ok
 props power "on" button_pressed "power" depth 24 -> ok
 props power "off" button_pressed "power" -> ok
-props humidify DD -> ok
+props humidity DD -> ok
 props buzzer "off" -> ok
 props child_lock "on" -> ok
 props child_lock "off" -> ok
@@ -45,7 +48,9 @@ event speed_change "sR_1" "sR_2" "temp_221" "humidity_53" "depth_23" -> ok
 event speed_change "sR_2" "sR_3" "temp_225" "humidity_52" "depth_21" -> ok
 event speed_change "sR_3" "sR_4" "temp_228" "humidity_51" "depth_21" -> ok
 event speed_change "sR_4" "sR_1" "temp_228" "humidity_51" "depth_21" -> ok
-
+status_report "temp_242" "humidity_52" "depth_43" "led_0" "buzzer_on" "power_off" "childLock_off" "useTime_ 43049"
+water_shortage
+water_box_off
 
 
 model zhimi.humidifier.ca1 -> ok
